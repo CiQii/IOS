@@ -1,0 +1,19 @@
+#[Zhiyi-N] Cookie 配置
+[Script]
+
+#快看点
+#获取Cookie
+http-request ^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点Cookie
+#获取签到Cookie
+http-request ^https://api.yuncheapp.cn/pearl-incentive/api/v1/task/signIn/* script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点签到
+
+#抖音极速版
+#签到
+http-request /luckycat/aweme/v1/task/sign_in/detail? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版sign
+#阅读
+http-request /luckycat/aweme/v1/task/done/read? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版read
+#走路
+http-request /luckycat/aweme/v1/task/walk/step_submit? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版step
+
+[MITM]
+hostname =api.yuncheapp.cn,*.amemv.com

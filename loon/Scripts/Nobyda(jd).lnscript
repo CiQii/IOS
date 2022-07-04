@@ -1,0 +1,6 @@
+[Script]
+#京东签到
+http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean tag=获取京东Cookie, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+[MITM]
+hostname=api.m.jd.com

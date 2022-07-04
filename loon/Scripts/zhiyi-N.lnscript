@@ -15,5 +15,5 @@ http-request /luckycat/aweme/v1/task/done/read? script-path=https://raw.githubus
 #走路
 http-request /luckycat/aweme/v1/task/walk/step_submit? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版step
 
-[MITM]
+[Mitm]
 hostname =api.yuncheapp.cn,*.amemv.com

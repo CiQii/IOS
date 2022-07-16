@@ -10,18 +10,18 @@ http-request ^https://api.yuncheapp.cn/pearl-incentive/api/v1/task/signIn/* scri
 
 #抖音极速版-zhiyi
 # > 签到
-http-request /luckycat/aweme/v1/task/sign_in/detail? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版sign
+http-request /luckycat/aweme/v1/task/sign_in/detail? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=获取签到数据, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 # > 刷视频
-http-request /luckycat/aweme/v1/task/done/read? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版read
+http-request /luckycat/aweme/v1/task/done/read? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=获取视频数据, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 # > 走路
-http-request /luckycat/aweme/v1/task/walk/step_submit? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版step
+http-request /luckycat/aweme/v1/task/walk/step_submit? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=获取步数数据, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 
 
 #抖音极速版-xqf
 # > 获取数据信息
-http-request luckycat/aweme/v1/task/done/(read|treasure_task|excitation_ad_treasure_box|excitation_ad|live_treasure)? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=抖音极速版🎵获取数据信息
+http-request luckycat/aweme/v1/task/done/(read|treasure_task|excitation_ad_treasure_box|excitation_ad|live_treasure)? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=获取数据信息, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 # > 获取个人信息
-http-request luckycat/aweme/v1/task/page? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=抖音极速版🎵获取个人信息
+http-request luckycat/aweme/v1/task/page? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=获取个人信息, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 
 [Mitm]
 hostname = api.yuncheapp.cn,*.amemv.com

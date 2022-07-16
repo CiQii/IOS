@@ -1,3 +1,6 @@
+#!name=BiliBili
+#!desc=观看港澳台番剧
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/https://github.com/Koolson/Qure/raw/master/IconSet/Color/bilibili_4.png
 [Script]
 http-response ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
 

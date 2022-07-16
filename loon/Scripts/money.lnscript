@@ -4,9 +4,9 @@
 
 #快看点
 # > 时段
-http-request ^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点Cookie
+http-request ^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=获取时段数据, img-url=https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/41/95/f7/4195f740-011c-82de-9302-4c99e3550016/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 # > 签到
-http-request ^https://api.yuncheapp.cn/pearl-incentive/api/v1/task/signIn/* script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点签到
+http-request ^https://api.yuncheapp.cn/pearl-incentive/api/v1/task/signIn/* script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=获取签到数据, img-url=https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/41/95/f7/4195f740-011c-82de-9302-4c99e3550016/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 
 #抖音极速版-zhiyi
 # > 签到

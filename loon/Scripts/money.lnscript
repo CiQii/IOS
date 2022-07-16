@@ -1,7 +1,4 @@
-
-#!name=getMoney
-#!desc= Cookie 配置
-#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+# [getMoney] Cookie 配置
 
 [Script]
 

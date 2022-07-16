@@ -1,7 +1,7 @@
 # [饿了么] 获取Cookie
 [Script]
 # > 获取任务列表
-http-request https://h5.ele.me/svip/task-list script-path=https://gitee.com/xiecoll/radish-script/raw/master/ELM/lb_elm.js, timeout=10, enabled=false, tag=饿了么获取Cookie
+http-request https://h5.ele.me/svip/task-list script-path=https://gitee.com/xiecoll/radish-script/raw/master/ELM/lb_elm.js, timeout=10, enabled=false, tag=饿了么获取Cookie, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/elem.png
 
 [Mitm]
 hostname = h5.ele.me

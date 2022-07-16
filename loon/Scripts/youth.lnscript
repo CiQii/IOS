@@ -1,7 +1,4 @@
-#!name=youth
-#!desc= 获取数据信息
-#!icon=https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/c2/5b/2b/c25b2bfb-0c8b-c030-f47e-b2a0822f1e73/AppIcon-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
-
+# [youth] 脚本以及获取数据信息
 [Script]
 cron "04 00 * * *" script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/youth.js, timeout=180, enabled=true, tag=中青看点
 

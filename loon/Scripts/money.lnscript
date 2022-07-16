@@ -1,19 +1,26 @@
-#[Zhiyi-N] Cookie 配置
+#[Zhiyi-N] && XWF888 Cookie 配置
 [Script]
 
 #快看点
-#获取Cookie
+# > 时段
 http-request ^https:\/\/api\.yuncheapp\.cn\/pearl-incentive\/api\/v1\/task\/intervalAward\/receive script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点Cookie
-#获取签到Cookie
+# > 签到
 http-request ^https://api.yuncheapp.cn/pearl-incentive/api/v1/task/signIn/* script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js, requires-body=true, timeout=10, tag=快看点签到
 
-#抖音极速版
-#签到
+#抖音极速版-zhiyi
+# > 签到
 http-request /luckycat/aweme/v1/task/sign_in/detail? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版sign
-#阅读
+# > 刷视频
 http-request /luckycat/aweme/v1/task/done/read? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版read
-#走路
+# > 走路
 http-request /luckycat/aweme/v1/task/walk/step_submit? script-path=https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/dyjsb.js, requires-body=true, timeout=10, tag=抖音极速版step
 
+
+#抖音极速版-xqf
+# > 获取数据信息
+http-request luckycat/aweme/v1/task/done/(read|treasure_task|excitation_ad_treasure_box|excitation_ad|live_treasure)? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=抖音极速版🎵获取数据信息
+# > 获取个人信息
+http-request luckycat/aweme/v1/task/page? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=抖音极速版🎵获取个人信息
+
 [Mitm]
-hostname =api.yuncheapp.cn,*.amemv.com
+hostname = api.yuncheapp.cn,*.amemv.com

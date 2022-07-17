@@ -24,4 +24,4 @@ http-request luckycat/aweme/v1/task/done/(read|treasure_task|excitation_ad_treas
 http-request luckycat/aweme/v1/task/page? script-path=https://raw.githubusercontent.com/XWF888/Task/Main/douying/dyjsb_xqf.js, timeout=10, enabled=false, tag=获取个人信息, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 
 [Mitm]
-hostname = api.yuncheapp.cn,*.amemv.com
+hostname = api.yuncheapp.cn,*.amemv.com,*.snssdk.com

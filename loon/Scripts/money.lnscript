@@ -25,9 +25,14 @@ http-request luckycat/aweme/v1/task/page? script-path=https://raw.githubusercont
 
 #抖音极速版-passerby-b
 # > 获取视频数据信息
-http-request luckycat/aweme/v1/task/done/read script-path=https://github.com/gz154838009/wgwy/raw/master/dyjs.js, requires-body=true, timeout=10, tag=抖音获取视频数据, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
+luckycat/aweme/v1/task/done/read https://github.com/gz154838009/wgwy/raw/master/dyjs.js, requires-body=true, timeout=10, tag=抖音获取视频数据, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
 # > 刷音符
 cron "*/30 * * * * *" script-path=https://github.com/gz154838009/wgwy/raw/master/dyjs.js,tag=抖音极速版刷音符, img-url=https://is5-ssl.mzstatic.com/image/thumb/Purple122/v4/32/a2/28/32a2289f-6fd6-df44-539a-b01ff52d2bbe/AppIcon_Lite-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/180x180bb.png
+
+
+http-request luckycat/novel/v1/task/sign_in/* script-path= https://github.com/CiQii/ios/raw/master/JS/fqxs.js ,tag=番茄小说获取签到数据
+
+http-request luckycat/novel/v1/task/done/excitation_ad_treasure_box/* script-path= https://github.com/CiQii/ios/raw/master/JS/fqxs.js ,tag=番茄小说获取宝箱数据
 
 [Mitm]
 hostname = api.yuncheapp.cn,*.amemv.com,*.snssdk.com

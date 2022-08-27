@@ -2,10 +2,9 @@
   "id": "sunert.app.sub",
   "author": "@Sunert",
   "icon": "https://avatars2.githubusercontent.com/u/47924389?s=460&u=5152f048a9e8aaa45102763a578172407c40fcc8&v=4",
-  "name": " XQ自用-Sunert订阅",
+  "name": " Mengo自用-Sunert订阅",
   "repo": "https://github.com/Sunert/Scripts/tree/master",
   "apps": [
-    
     {
       "author": "@sunert",
       "descs_html": [
@@ -85,7 +84,7 @@
     },
     {
       "author": "@sunert",
-      "keys": [ ],
+      "keys": [],
       "repo": "https://github.com/Sunert/Scripts/blob/master/Task/trainquery.js",
       "id": "trainquery",
       "script": "https://raw.githubusercontent.com/Sunert/Scripts/master/Task/trainquery.js",

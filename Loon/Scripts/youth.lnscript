@@ -1,0 +1,22 @@
+# [youth] 脚本以及获取数据信息
+[Script]
+
+cron "04 00 * * *" script-path=https://fastly.jsdelivr.net/gh/GoodHolidays/Scripts/Task/youth.js, timeout=180, enabled=true, tag=中青看点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/kd\.youth\.cn\/WebApi\/NewTaskIos\/getTaskList script-path=https://fastly.jsdelivr.net/gh/GoodHolidays/Scripts/Task/youth.js, enabled=true, tag=获取任务中心, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/ios\.baertt\.com\/v5\/article\/info\/get\.json script-path=https://fastly.jsdelivr.net/gh/GoodHolidays/Scripts/Task/youth.js,  enabled=true, tag=获取阅读请求, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/ios\.baertt\.com\/v5\/user\/stay\.json script-path=https://fastly.jsdelivr.net/gh/GoodHolidays/Scripts/Task/youth.js, requires-body=true, enabled=true, tag=获取阅读时长, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/ios\.baertt\.com\/v5\/\w+\/withdraw\d?\.json script-path=https://fastly.jsdelivr.net/gh/GoodHolidays/Scripts/Task/youth.js, requires-body=true, enabled=true, tag= 获取提现请求, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+# > 看看赚
+cron "6 7 * * *" script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, enabled=false, tag=中青看点📖浏览赚, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/ios\.baertt\.com\/v5\/task\/browse_start\.json script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, requires-body=true, enabled=true, tag=获取浏览赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+http-request https:\/\/ios\.baertt\.com\/v5\/Nameless\/adlickstart\.json script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, requires-body=true, enabled=true, tag=获取看看赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+
+[Mitm]
+hostname = ios.baertt.com, kd.youth.cn

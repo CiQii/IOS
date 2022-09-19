@@ -6,50 +6,6 @@
   "repo": "https://github.com/ZhiYi-N/Private-Script",
   "apps": [
     {
-      "id": "kkd",
-      "name": "快看点",
-      "keys": [
-        "kkdheader",
-        "kkdcookie",
-        "kkdsign",
-        "kkdheader2",
-        "kkdcookie2",
-        "kkdsign2",
-        "kkdheader3",
-        "kkdcookie3"
-      ],
-      "author": "@ZhiYi-N",
-      "settings": [
-        {
-          "id": "tz",
-          "name": "静默运行",
-          "val": "1",
-          "type": "number",
-          "desc": "0为不通知，1为全部通知"
-        },
-        {
-          "id": "kkdsetting",
-          "name": "当前账号",
-          "val": "1",
-          "type": "number",
-          "desc": "当前账号对应"
-        },
-        {
-          "id": "kkdcount",
-          "name": "账号个数",
-          "val": "1",
-          "type": "number",
-          "desc": "需要几个账号，数字为几"
-        }
-      ],
-      "repo": "https://github.com/ZhiYi-N/Private-Script/blob/master/Scripts/kkd.js",
-      "icons": [
-        "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/kkd-mini.png",
-        "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/kkd.png"
-      ],
-      "script": "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/kkd.js"
-    },
-    {
       "id": "dyjsb",
       "name": "抖音极速版",
       "keys": [

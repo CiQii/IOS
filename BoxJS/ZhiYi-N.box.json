@@ -1,6 +1,6 @@
 {
   "id": "ZhiYi-N.app.sub",
-  "name": "XQ自用订阅-ZhiYi-N",
+  "name": "Mengo自用订阅-ZhiYi-N",
   "author": "@ZhiYi-N",
   "icon": "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/ZhiYi-N.png",
   "repo": "https://github.com/ZhiYi-N/Private-Script",
@@ -10,7 +10,7 @@
       "name": "抖音极速版",
       "keys": [
         "dylite_ads_header",
-        "dylite_adskey",
+        "dylite_ads_key",
         "dylite_box_header",
         "dylite_box_key",
         "dylite_box_ads_header",

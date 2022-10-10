@@ -1,24 +1,3 @@
-/*
-抖音极速版
-功能：签到（有点问题），限时广告，首页宝箱，宝箱广告，直播宝箱，提现0.3，提交步数
-
-hostname = *.amemv.com,*.snssdk.com
-
-[rewrite_local]
-#总音符
-/luckycat/aweme/v1/task/page? url script-request-header dyLite.js
-
-#签到（有问题
-/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dyLite.js
-
-#步数
-/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dyLite.js
-
-#红包进度条，首页宝箱，宝箱广告，直播宝箱
-luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box|live_treasure)? url script-request-header dyLite.js
-*/
-
-
 const jsname = '抖音极速版'
 const $ = Env(jsname)
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -31,29 +10,29 @@ const signheaderArr = [], signcookieArr = []
 const stepheaderArr = [], stepkeyArr = []
 const readheaderArr = [], readkeyArr = []
 
-let adsheader = $.getdata('dylite_ads_header')
-let adskey = $.getdata('dylite_adskey')
+let adsheader = $.getdata('adsheader')
+let adskey = $.getdata('adskey')
 
-let boxheader = $.getdata('dylite_box_header')
-let boxkey = $.getdata('dylite_box_key')
+let boxheader = $.getdata('boxheader')
+let boxkey = $.getdata('boxkey')
 
-let boxadsheader = $.getdata('dylite_box_ads_header')
-let boxadskey = $.getdata('dylite_box_ads_key')
+let boxadsheader = $.getdata('boxadsheader')
+let boxadskey = $.getdata('boxadskey')
 
-let infoheader = $.getdata('dylite_info_header')
-let infokey = $.getdata('dylite_info_key')
+let infoheader = $.getdata('infoheader')
+let infokey = $.getdata('infokey')
 
-let liveheader = $.getdata('dylite_live_header')
-let livekey = $.getdata('dylite_live_key')
+let liveheader = $.getdata('liveheader')
+let livekey = $.getdata('livekey')
 
-let signheader = $.getdata('dylite_sign_header')
-let signcookie = $.getdata('dylite_sign_cookie')
+let signheader = $.getdata('signheader')
+let signcookie = $.getdata('signcookie')
 
-let stepheader = $.getdata('dylite_step_header')
-let stepkey = $.getdata('dylite_step_key')
+let stepheader = $.getdata('stepheader')
+let stepkey = $.getdata('stepkey')
 
-let readheader = $.getdata('dylite_read_header')
-let readkey = $.getdata('dylite_read_key')
+let readheader = $.getdata('readheader')
+let readkey = $.getdata('readkey')
 
 let dyhost = ($.getdata('dyhost') || 'api5-normal-c-lf.amemv.com')
 let dyjsbaccount;
@@ -67,12 +46,8 @@ const readbody = `{
   "task_key": "read"
 }`
 if ($.isNode()) {
-   // hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
-    //minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
-  
-    hour = (new Date()).getHours();
-    minute = (new Date()).getMinutes();
-  
+    hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
+    minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
 } else {
     hour = (new Date()).getHours();
     minute = (new Date()).getMinutes();
@@ -86,167 +61,167 @@ if (isGetCookie) {
 }
 if ($.isNode()) {
     //ads
-    if (process.env.DY_ADS_HEADER && process.env.DY_ADS_HEADER.indexOf('#') > -1) {
-        adsheader = process.env.DY_ADS_HEADER.split('#');
+    if (process.env.ADSHEADER && process.env.ADSHEADER.indexOf('#') > -1) {
+        adsheader = process.env.ADSHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_ADS_HEADER && process.env.DY_ADS_HEADER.indexOf('\n') > -1) {
-        adsheader = process.env.DY_ADS_HEADER.split('\n');
+    } else if (process.env.ADSHEADER && process.env.ADSHEADER.indexOf('\n') > -1) {
+        adsheader = process.env.ADSHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        adsheader = process.env.DY_ADS_HEADER.split()
+        adsheader = process.env.ADSHEADER.split()
     }
     ;
 
-    if (process.env.DY_ADS_KEY && process.env.DY_ADS_KEY.indexOf('#') > -1) {
-        adskey = process.env.DY_ADS_KEY.split('#');
+    if (process.env.ADSKEY && process.env.ADSKEY.indexOf('#') > -1) {
+        adskey = process.env.ADSKEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_ADS_KEY && process.env.DY_ADS_KEY.indexOf('\n') > -1) {
-        adskey = process.env.DY_ADS_KEY.split('\n');
+    } else if (process.env.ADSKEY && process.env.ADSKEY.indexOf('\n') > -1) {
+        adskey = process.env.ADSKEY.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        adskey = process.env.DY_ADS_KEY.split()
+        adskey = process.env.ADSKEY.split()
     }
     ;
     //box
-    if (process.env.DY_BOX_HEADER && process.env.DY_BOX_HEADER.indexOf('#') > -1) {
-        boxheader = process.env.DY_BOX_HEADER.split('#');
+    if (process.env.BOXHEADER && process.env.BOXHEADER.indexOf('#') > -1) {
+        boxheader = process.env.BOXHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_BOX_HEADER && process.env.DY_BOX_HEADER.indexOf('\n') > -1) {
-        boxheader = process.env.DY_BOX_HEADER.split('\n');
+    } else if (process.env.BOXHEADER && process.env.BOXHEADER.indexOf('\n') > -1) {
+        boxheader = process.env.BOXHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        boxheader = process.env.DY_BOX_HEADER.split()
+        boxheader = process.env.BOXHEADER.split()
     }
     ;
 
-    if (process.env.DY_BOX_KEY && process.env.DY_BOX_KEY.indexOf('#') > -1) {
-        boxkey = process.env.DY_BOX_KEY.split('#');
+    if (process.env.BOXKEY && process.env.BOXKEY.indexOf('#') > -1) {
+        boxkey = process.env.BOXKEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_BOX_KEY && process.env.DY_BOX_KEY.indexOf('\n') > -1) {
-        boxkey = process.env.DY_BOX_KEY.split('\n');
+    } else if (process.env.BOXKEY && process.env.BOXKEY.indexOf('\n') > -1) {
+        boxkey = process.env.BOXKEY.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        boxkey = process.env.DY_BOX_KEY.split()
+        boxkey = process.env.BOXKEY.split()
     }
     ;
     //boxads
-    if (process.env.DY_BOX_ADS_HEADER && process.env.DY_BOX_ADS_HEADER.indexOf('#') > -1) {
-        boxadsheader = process.env.DY_BOX_ADS_HEADER.split('#');
+    if (process.env.BOXADSHEADER && process.env.BOXADSHEADER.indexOf('#') > -1) {
+        boxadsheader = process.env.BOXADSHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_BOX_ADS_HEADER && process.env.DY_BOX_ADS_HEADER.indexOf('\n') > -1) {
-        boxadsheader = process.env.DY_BOX_ADS_HEADER.split('\n');
+    } else if (process.env.BOXADSHEADER && process.env.BOXADSHEADER.indexOf('\n') > -1) {
+        boxadsheader = process.env.BOXADSHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        boxadsheader = process.env.DY_BOX_ADS_HEADER.split()
+        boxadsheader = process.env.BOXADSHEADER.split()
     }
     ;
-    if (process.env.DY_BOX_ADS_KEY && process.env.DY_BOX_ADS_KEY.indexOf('#') > -1) {
-        boxadskey = process.env.DY_BOX_ADS_KEY.split('#');
+    if (process.env.BOXADSKEY && process.env.BOXADSKEY.indexOf('#') > -1) {
+        boxadskey = process.env.BOXADSKEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_BOX_ADS_KEY && process.env.DY_BOX_ADS_KEY.indexOf('\n') > -1) {
-        boxadskey = process.env.DY_BOX_ADS_KEY.split('\n');
+    } else if (process.env.BOXADSKEY && process.env.BOXADSKEY.indexOf('\n') > -1) {
+        boxadskey = process.env.BOXADSKEY.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        boxadskey = process.env.DY_BOX_ADS_KEY.split()
+        boxadskey = process.env.BOXADSKEY.split()
     }
     ;
     //info
-    if (process.env.DY_INFO_HEADER && process.env.DY_INFO_HEADER.indexOf('#') > -1) {
-        infoheader = process.env.DY_INFO_HEADER.split('#');
+    if (process.env.INFOHEADER && process.env.INFOHEADER.indexOf('#') > -1) {
+        infoheader = process.env.INFOHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_INFO_HEADER && process.env.DY_INFO_HEADER.indexOf('\n') > -1) {
-        infoheader = process.env.DY_INFO_HEADER.split('\n');
+    } else if (process.env.INFOHEADER && process.env.INFOHEADER.indexOf('\n') > -1) {
+        infoheader = process.env.INFOHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        infoheader = process.env.DY_INFO_HEADER.split()
+        infoheader = process.env.INFOHEADER.split()
     }
     ;
-    if (process.env.DY_INFO_KEY && process.env.DY_INFO_KEY.indexOf('#') > -1) {
-        infokey = process.env.DY_INFO_KEY.split('#');
+    if (process.env.INFOKEY && process.env.INFOKEY.indexOf('#') > -1) {
+        infokey = process.env.INFOKEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_INFO_KEY && process.env.DY_INFO_KEY.indexOf('\n') > -1) {
-        infokey = process.env.DY_INFO_KEY.split('\n');
+    } else if (process.env.INFOKEY && process.env.INFOKEY.indexOf('\n') > -1) {
+        infokey = process.env.INFOKEY.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        infokey = process.env.DY_INFO_KEY.split()
+        infokey = process.env.INFOKEY.split()
     }
     ;
     //live
-    if (process.env.DY_LIVE_HEADER && process.env.DY_LIVE_HEADER.indexOf('#') > -1) {
-        liveheader = process.env.DY_LIVE_HEADER.split('#');
+    if (process.env.LIVEHEADER && process.env.LIVEHEADER.indexOf('#') > -1) {
+        liveheader = process.env.LIVEHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_LIVE_HEADER && process.env.DY_LIVE_HEADER.indexOf('\n') > -1) {
-        liveheader = process.env.DY_LIVE_HEADER.split('\n');
+    } else if (process.env.LIVEHEADER && process.env.LIVEHEADER.indexOf('\n') > -1) {
+        liveheader = process.env.LIVEHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        liveheader = process.env.DY_LIVE_HEADER.split()
+        liveheader = process.env.LIVEHEADER.split()
     }
     ;
-    if (process.env.DY_LIVE_KEY && process.env.DY_LIVE_KEY.indexOf('#') > -1) {
-        livekey = process.env.DY_LIVE_KEY.split('#');
+    if (process.env.LIVEKEY && process.env.LIVEKEY.indexOf('#') > -1) {
+        livekey = process.env.LIVEKEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_LIVE_KEY && process.env.DY_LIVE_KEY.indexOf('\n') > -1) {
-        livekey = process.env.DY_LIVE_KEY.split('\n');
+    } else if (process.env.LIVEKEY && process.env.LIVEKEY.indexOf('\n') > -1) {
+        livekey = process.env.LIVEKEY.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        livekey = process.env.DY_LIVE_KEY.split()
+        livekey = process.env.LIVEKEY.split()
     }
     ;
 //sign
-    if (process.env.DY_SIGN_HEADER && process.env.DY_SIGN_HEADER.indexOf('#') > -1) {
-        signheader = process.env.DY_SIGN_HEADER.split('#');
+    if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('#') > -1) {
+        signheader = process.env.SIGNHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_SIGN_HEADER && process.env.DY_SIGN_HEADER.indexOf('\n') > -1) {
-        signheader = process.env.DY_SIGN_HEADER.split('\n');
+    } else if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('\n') > -1) {
+        signheader = process.env.SIGNHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        signheader = process.env.DY_SIGN_HEADER.split()
+        signheader = process.env.SIGNHEADER.split()
     }
     ;
-    if (process.env.DY_SIGN_COOKIE && process.env.DY_SIGN_COOKIE.indexOf('#') > -1) {
-        signcookie = process.env.DY_SIGN_COOKIE.split('#');
-    } else if (process.env.DY_SIGN_COOKIE && process.env.DY_SIGN_COOKIE.split('\n').length > 0) {
-        signcookie = process.env.DY_SIGN_COOKIE.split('\n');
+    if (process.env.SIGNCOOKIE && process.env.SIGNCOOKIE.indexOf('#') > -1) {
+        signcookie = process.env.SIGNCOOKIE.split('#');
+    } else if (process.env.SIGNCOOKIE && process.env.SIGNCOOKIE.split('\n').length > 0) {
+        signcookie = process.env.SIGNCOOKIE.split('\n');
     } else {
-        signcookie = process.env.DY_SIGN_COOKIE.split()
+        signcookie = process.env.SIGNCOOKIE.split()
     }
     ;
 //step
-    if (process.env.DY_STEP_HEADER && process.env.DY_STEP_HEADER.indexOf('#') > -1) {
-        stepheader = process.env.DY_STEP_HEADER.split('#');
+    if (process.env.STEPHEADER && process.env.STEPHEADER.indexOf('#') > -1) {
+        stepheader = process.env.STEPHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_STEP_HEADER && process.env.DY_STEP_HEADER.indexOf('\n') > -1) {
-        stepheader = process.env.DY_STEP_HEADER.split('\n');
+    } else if (process.env.STEPHEADER && process.env.STEPHEADER.indexOf('\n') > -1) {
+        stepheader = process.env.STEPHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        stepheader = process.env.DY_STEP_HEADER.split()
+        stepheader = process.env.STEPHEADER.split()
     }
     ;
-    if (process.env.DY_STEP_KEY && process.env.DY_STEP_KEY.indexOf('#') > -1) {
-        stepkey = process.env.DY_STEP_KEY.split('#');
-    } else if (process.env.DY_STEP_KEY && process.env.DY_STEP_KEY.split('\n').length > 0) {
-        stepkey = process.env.DY_STEP_KEY.split('\n');
+    if (process.env.STEPKEY && process.env.STEPKEY.indexOf('#') > -1) {
+        stepkey = process.env.STEPKEY.split('#');
+    } else if (process.env.STEPKEY && process.env.STEPKEY.split('\n').length > 0) {
+        stepkey = process.env.STEPKEY.split('\n');
     } else {
-        stepkey = process.env.DY_STEP_KEY.split()
+        stepkey = process.env.STEPKEY.split()
     }
     ;
 //read
-    if (process.env.DY_READ_HEADER && process.env.DY_READ_HEADER.indexOf('#') > -1) {
-        readheader = process.env.DY_READ_HEADER.split('#');
+    if (process.env.READHEADER && process.env.READHEADER.indexOf('#') > -1) {
+        readheader = process.env.READHEADER.split('#');
         console.log(`您选择的是用"#"隔开\n`)
-    } else if (process.env.DY_READ_HEADER && process.env.DY_READ_HEADER.indexOf('\n') > -1) {
-        readheader = process.env.DY_READ_HEADER.split('\n');
+    } else if (process.env.READHEADER && process.env.READHEADER.indexOf('\n') > -1) {
+        readheader = process.env.READHEADER.split('\n');
         console.log(`您选择的是用换行隔开\n`)
     } else {
-        readheader = process.env.DY_READ_HEADER.split()
+        readheader = process.env.READHEADER.split()
     }
     ;
-    if (process.env.DY_READ_KEY && process.env.DY_READ_KEY.indexOf('#') > -1) {
-        readkey = process.env.DY_READ_KEY.split('#');
-    } else if (process.env.DY_READ_KEY && process.env.DY_READ_KEY.split('\n').length > 0) {
-        readkey = process.env.DY_READ_KEY.split('\n');
+    if (process.env.READKEY && process.env.READKEY.indexOf('#') > -1) {
+        readkey = process.env.READKEY.split('#');
+    } else if (process.env.READKEY && process.env.READKEY.split('\n').length > 0) {
+        readkey = process.env.READKEY.split('\n');
     } else {
-        readkey = process.env.DY_READ_KEY.split()
+        readkey = process.env.READKEY.split()
     }
     ;
     //ads
@@ -337,61 +312,60 @@ if ($.isNode()) {
             readkeyArr.push(readkey[item])
         }
     });
-  console.log(`============ 脚本执行-北京时间(UTC)：${new Date().toLocaleString()}  =============\n`)
-    //console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
-    //console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
+    console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
+    console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
 } else {
-    adsheaderArr.push($.getdata('dylite_ads_header'))
-    adskeyArr.push($.getdata('dylite_adskey'))
+    adsheaderArr.push($.getdata('adsheader'))
+    adskeyArr.push($.getdata('adskey'))
 
-    boxheaderArr.push($.getdata('dylite_box_header'))
-    boxkeyArr.push($.getdata('dylite_box_key'))
+    boxheaderArr.push($.getdata('boxheader'))
+    boxkeyArr.push($.getdata('boxkey'))
 
-    boxadsheaderArr.push($.getdata('dylite_box_ads_header'))
-    boxadskeyArr.push($.getdata('dylite_box_ads_key'))
+    boxadsheaderArr.push($.getdata('boxadsheader'))
+    boxadskeyArr.push($.getdata('boxadskey'))
 
-    infoheaderArr.push($.getdata('dylite_info_header'))
-    infokeyArr.push($.getdata('dylite_info_key'))
+    infoheaderArr.push($.getdata('liveheader'))
+    infokeyArr.push($.getdata('livekey'))
 
-    liveheaderArr.push($.getdata('dylite_live_header'))
-    livekeyArr.push($.getdata('dylite_live_key'))
+    liveheaderArr.push($.getdata('liveheader'))
+    livekeyArr.push($.getdata('livekey'))
 
-    signheaderArr.push($.getdata('dylite_sign_header'))
-    signcookieArr.push($.getdata('dylite_sign_cookie'))
+    signheaderArr.push($.getdata('signheader'))
+    signcookieArr.push($.getdata('signcookie'))
 
-    stepheaderArr.push($.getdata('dylite_step_header'))
-    stepkeyArr.push($.getdata('dylite_step_key'))
+    stepheaderArr.push($.getdata('stepheader'))
+    stepkeyArr.push($.getdata('stepkey'))
 
-    readheaderArr.push($.getdata('dylite_read_header'))
-    readkeyArr.push($.getdata('dylite_read_key'))
+    readheaderArr.push($.getdata('readheader'))
+    readkeyArr.push($.getdata('readkey'))
 
     let dyjsbcount = ($.getval('dyjsbcount') || '1');
 
     for (let i = 2; i <= dyjsbcount; i++) {
 
-        adsheaderArr.push($.getdata(`dylite_ads_header${i}`))
-        adskeyArr.push($.getdata(`dylite_adskey${i}`))
+        adsheaderArr.push($.getdata(`adsheader${i}`))
+        adskeyArr.push($.getdata(`adskey${i}`))
 
-        boxheaderArr.push($.getdata(`dylite_box_header${i}`))
-        boxkeyArr.push($.getdata(`dylite_box_key${i}`))
+        boxheaderArr.push($.getdata(`boxheader${i}`))
+        boxkeyArr.push($.getdata(`boxkey${i}`))
 
-        boxadsheaderArr.push($.getdata(`dylite_box_ads_header${i}`))
-        boxadskeyArr.push($.getdata(`dylite_box_ads_key${i}`))
+        boxadsheaderArr.push($.getdata(`boxadsheader${i}`))
+        boxadskeyArr.push($.getdata(`boxadskey${i}`))
 
-        infoheaderArr.push($.getdata(`dylite_info_header${i}`))
-        infokeyArr.push($.getdata(`dylite_info_key${i}`))
+        infoheaderArr.push($.getdata(`infoheader${i}`))
+        infokeyArr.push($.getdata(`infokey${i}`))
 
-        liveheaderArr.push($.getdata(`dylite_live_header${i}`))
-        livekeyArr.push($.getdata(`dylite_live_key${i}`))
+        liveheaderArr.push($.getdata(`liveheader${i}`))
+        livekeyArr.push($.getdata(`livekey${i}`))
 
-        signheaderArr.push($.getdata(`dylite_sign_header${i}`))
-        signcookieArr.push($.getdata(`dylite_sign_cookie${i}`))
+        signheaderArr.push($.getdata(`signheader${i}`))
+        signcookieArr.push($.getdata(`signcookie${i}`))
 
-        stepheaderArr.push($.getdata(`dylite_step_header${i}`))
-        stepkeyArr.push($.getdata(`dylite_step_key${i}`))
+        stepheaderArr.push($.getdata(`stepheader${i}`))
+        stepkeyArr.push($.getdata(`stepkey${i}`))
 
-        readheaderArr.push($.getdata(`dylite_read_header${i}`))
-        readkeyArr.push($.getdata(`dylite_read_key${i}`))
+        readheaderArr.push($.getdata(`readheader${i}`))
+        readkeyArr.push($.getdata(`readkey${i}`))
 
     }
 }
@@ -443,11 +417,11 @@ function GetCookie() {
 //限时广告
     if ($request && $request.url.indexOf("aweme" && "excitation_ad") >= 0) {
         const adsheader = $request.url.split(`?`)[1]
-        if (adsheader) $.setdata(adsheader, 'dylite_ads_header')
+        if (adsheader) $.setdata(adsheader, `adsheader ${$.idx}`)
         $.log(`[${jsname}] 获取ads请求: 成功, adsheader: ${adsheader}`)
         $.msg(`获取adsheader: 成功🎉`, ``)
         const adskey = JSON.stringify($request.headers)
-        if (adskey) $.setdata(adskey, 'dylite_ads_key')
+        if (adskey) $.setdata(adskey, `adskey ${$.idx}`)
         $.log(`[${jsname}] 获取ads请求: 成功, adskey: ${adskey}`)
         $.msg(`获取adskey: 成功🎉`, ``)
     }
@@ -455,11 +429,11 @@ function GetCookie() {
 //首页宝箱
     if ($request && $request.url.indexOf("aweme" && "treasure_task") >= 0) {
         const boxheader = $request.url.split(`?`)[1]
-        if (boxheader) $.setdata(boxheader, 'dylite_box_header')
+        if (boxheader) $.setdata(boxheader, `boxheader ${$.idx}`)
         $.log(`[${jsname}] 获取box请求: 成功, boxheader: ${boxheader}`)
         $.msg(`获取boxheader: 成功🎉`, ``)
         const boxkey = JSON.stringify($request.headers)
-        if (boxkey) $.setdata(boxkey, 'dylite_box_key')
+        if (boxkey) $.setdata(boxkey, `boxkey ${$.idx}`)
         $.log(`[${jsname}] 获取box请求: 成功, boxkey: ${boxkey}`)
         $.msg(`获取boxkey: 成功🎉`, ``)
     }
@@ -467,96 +441,93 @@ function GetCookie() {
 //宝箱广告
     if ($request && $request.url.indexOf("aweme" && "_treasure_box") >= 0) {
         const boxadsheader = $request.url.split(`?`)[1]
-        if (boxadsheader) $.setdata(boxadsheader, 'dylite_box_ads_header')
+        if (boxadsheader) $.setdata(boxadsheader, `boxadsheader ${$.idx}`)
         $.log(`[${jsname}] 获取boxads请求: 成功, boxadsheader: ${boxadsheader}`)
         $.msg(`获取boxadsheader: 成功🎉`, ``)
         const boxadskey = JSON.stringify($request.headers)
-        if (boxadskey) $.setdata(boxadskey, 'dylite_box_ads_key')
+        if (boxadskey) $.setdata(boxadskey, `boxadskey ${$.idx}`)
         $.log(`[${jsname}] 获取boxads请求: 成功, boxadskey: ${boxadskey}`)
         $.msg(`获取boxadskey: 成功🎉`, ``)
     }
 //直播宝箱
     if ($request && $request.url.indexOf("aweme" && "live_treasure") >= 0) {
         const liveheader = $request.url.split(`?`)[1]
-        if (liveheader) $.setdata(liveheader, 'dylite_live_header')
+        if (liveheader) $.setdata(liveheader, `liveheader ${$.idx}`)
         $.log(`[${jsname}] 获取live请求: 成功, liveheader: ${liveheader}`)
         $.msg(`获取liveheader: 成功🎉`, ``)
         const livekey = JSON.stringify($request.headers)
-        if (livekey) $.setdata(livekey, 'dylite_live_key')
+        if (livekey) $.setdata(livekey, `livekey ${$.idx}`)
         $.log(`[${jsname}] 获取live请求: 成功, livekey: ${livekey}`)
         $.msg(`获取livekey: 成功🎉`, ``)
     }
     //显示总音符
     if ($request && $request.url.indexOf("page") >= 0) {
         const infoheader = $request.url.split(`?`)[1]
-        if (infoheader) $.setdata(infoheader, 'dylite_info_header')
+        if (infoheader) $.setdata(infoheader, 'infoheader')
         $.log(`[${jsname}] 获取info请求: 成功,infoheader: ${infoheader}`)
         $.msg(`获取infoheader: 成功🎉`, ``)
         const infokey = JSON.stringify($request.headers)
-        if (infokey) $.setdata(infokey, 'dylite_info_key')
+        if (infokey) $.setdata(infokey, 'infokey')
         $.log(`[${jsname}] 获取info请求: 成功,infokey: ${infokey}`)
         $.msg(`获取infokey: 成功🎉`, ``)
     }
     //签到
     if ($request && $request.url.indexOf("sign_in") >= 0) {
         const signheader = $request.url.split(`?`)[1]
-        if (signheader) $.setdata(signheader, 'dylite_sign_header')
+        if (signheader) $.setdata(signheader, 'signheader')
         $.log(`[${jsname}] 获取sign请求: 成功,signheader: ${signheader}`)
         $.msg(`获取signheader: 成功🎉`, ``)
         const signcookie = $request.headers['Cookie']
-        if (signcookie) $.setdata(signcookie, 'dylite_sign_cookie')
+        if (signcookie) $.setdata(signcookie, 'signcookie')
         $.log(`[${jsname}] 获取sign请求: 成功,signcookie: ${signcookie}`)
         $.msg(`获取signcookie: 成功🎉`, ``)
     }
     //走路
     if ($request && $request.url.indexOf("step_submit") >= 0) {
         const stepheader = $request.url.split(`?`)[1]
-        if (stepheader) $.setdata(stepheader, 'dylite_step_header')
+        if (stepheader) $.setdata(stepheader, 'stepheader')
         $.log(`[${jsname}] 获取step请求: 成功,stepheader: ${stepheader}`)
         $.msg(`获取stepheader: 成功🎉`, ``)
         const stepkey = JSON.stringify($request.headers)
-        if (stepkey) $.setdata(stepkey, 'dylite_step_key')
+        if (stepkey) $.setdata(stepkey, 'stepkey')
         $.log(`[${jsname}] 获取step请求: 成功,stepkey: ${stepkey}`)
         $.msg(`获取stepkey: 成功🎉`, ``)
     }
     //刷视频
     if ($request && $request.url.indexOf("done/read") >= 0) {
         const readheader = $request.url.split(`?`)[1]
-        if (readheader) $.setdata(readheader, 'dylite_read_header')
+        if (readheader) $.setdata(readheader, 'readheader')
         $.log(`[${jsname}] 获取read请求: 成功,readheader: ${readheader}`)
         $.msg(`获取readheader: 成功🎉`, ``)
         const readkey = JSON.stringify($request.headers)
-        if (readkey) $.setdata(readkey, 'dylite_read_key')
+        if (readkey) $.setdata(readkey, 'readkey')
         $.log(`[${jsname}] 获取read请求: 成功,readkey: ${readkey}`)
         $.msg(`获取readkey: 成功🎉`, ``)
     }
 }
 
 async function control() {
-       
+
+    if (hour == 11 && minute <= 10) {
+        await sign_in()
+        await $.wait(1000);
+        await step_submit();
+        await $.wait(1000);
+        await step_reward();
+        await $.wait(1000);
+        await withdraw();
+    }
     await $.wait(1000);
     await query_info();
     await $.wait(1000);
     await open_box();
     await $.wait(2000);
     await watch_box_ads();
-  
+    await $.wait(2000);
     if (hour <= 2) {
-      await $.wait(2000);
-      await open_live_box()
-    
+        await open_live_box()
     }
-    if (hour == 11 && minute <= 10) {
-      await $.wait(1000);
-      await withdraw();
-      await $.wait(1000);
-      await sign_in()
-      await $.wait(1000);
-      await step_submit();
-      await $.wait(1000);
-      await step_reward();
-      await $.wait(1000);
-    }
+
 }
 
 
@@ -653,7 +624,7 @@ function open_live_box() {
     })
 }
 
-//查询所得音符
+//打开直播宝箱
 function query_info() {
     return new Promise((resolve, reject) => {
         let info_url = {
@@ -665,9 +636,9 @@ function query_info() {
         $.get(info_url, async (error, response, data) => {
             const result = JSON.parse(data)
             if (logs) $.log(data)
-            message += '\n📣查询今日音符\n'
+            message += '\n📣查询所得音符\n'
             if (result.err_no == 0) {
-                message += '🎉' + result.err_tips + "查询音符🎵:" + result.data.income_data.amount1 + '\n'
+                message += '🎉' + result.err_tips + "音符总数🎵:" + result.data.income_data.amount1 + '\n'
             } else {
                 message += '⚠️查询失败\n'
             }
@@ -680,10 +651,10 @@ function query_info() {
 function sign_in() {
     return new Promise((resolve, reject) => {
         let sign_inurl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/done/sign_in?${signheader}`,
+            url: `https://aweme-lq.snssdk.com/luckycat/aweme/v1/task/done/sign_in?${signheader}`,
             headers: {
                 Cookie: signcookie,
-                'User-Agent': 'AwemeLite 14.9.0 rv:149005 (iPhone; iOS 14.4.2; zh_CN) Cronet'
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.12 (KHTNL, like Gecko) Mobile/15E148'
             }
         }
         $.post(sign_inurl, (error, response, data) => {
@@ -706,7 +677,7 @@ function step_submit() {
     const time = Math.round(new Date().getTime() / 1000).toString();
     return new Promise((resolve, reject) => {
         let step_submiturl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/walk/step_submit?${stepheader}`,
+            url: `https://aweme-lq.snssdk.com/luckycat/aweme/v1/task/walk/step_submit?${stepheader}`,
             headers: JSON.parse(stepkey),
             body: `{
   "step" : ${steps},
@@ -733,7 +704,7 @@ function step_submit() {
 function step_reward() {
     return new Promise((resolve, reject) => {
         let step_rewardurl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/walk/receive_step_reward?${stepheader}`,
+            url: `https://aweme-lq.snssdk.com/luckycat/aweme/v1/task/walk/receive_step_reward?${stepheader}`,
             headers: JSON.parse(stepkey),
             body: `{"in_sp_time":0}`
         }
@@ -755,7 +726,7 @@ function step_reward() {
 function watch_video() {
     return new Promise((resolve, reject) => {
         let watch_videourl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/done/read?${readheader}`,
+            url: `https://aweme-lq.snssdk.com/luckycat/aweme/v1/task/done/read?${readheader}`,
             headers: JSON.parse(readkey),
             body: `{
   "in_sp_time" : 0,
@@ -779,10 +750,11 @@ function watch_video() {
         })
     })
 }
+
 //withdraw alipay 0.3
 function withdraw() {
     return new Promise((resolve, reject) => {
-        let withdrawurl ={
+        let withdrawurl = {
             url: `https://${dyhost}/luckycat/aweme/v1/wallet/take_cash?task_key=jiao_take_cash&${signheader}`,
             headers: JSON.parse(readkey),
             body: `{
@@ -796,20 +768,20 @@ function withdraw() {
 }`
         }
 
-        $.post(withdrawurl,(error, response, data) =>{
+        $.post(withdrawurl, (error, response, data) => {
             const result = JSON.parse(data)
-            if(logs) $.log(data)
-            message += '📣开始提现金额\n'
-            if(result.err_no == 0){
+            if (logs) $.log(data)
+            if (result.err_no == 0) {
                 //console.log('🎉' + result.err_tips+'提现0.3元\n')
-                message += '🎉' + result.err_tips+'提现0.3元\n'
-            }else{
-                console.log('⚠️' +result.err_tips)
+                message += '🎉' + result.err_tips + '提现0.3元\n'
+            } else {
+                console.log('⚠️' + result.err_tips)
             }
             resolve()
         })
     })
 }
+
 function invitation() {
     return new Promise((resolve, reject) => {
         let invitatonurl = {
@@ -829,7 +801,7 @@ async function showmsg() {
     if (tz == 1) {
         if ($.isNode()) {
             $.log(message)
-            if (hour == 11 && minute <= 10) {
+            if ((hour == 12 && minute <= 20) || (hour == 23 && minute >= 40)) {
                 await notify.sendNotify($.name, message)
             }
         } else {

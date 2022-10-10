@@ -84,61 +84,41 @@
     },
     {
       "author": "@sunert",
-      "keys": [],
-      "repo": "https://github.com/Sunert/Scripts/blob/master/Task/trainquery.js",
-      "id": "trainquery",
-      "script": "https://raw.githubusercontent.com/Sunert/Scripts/master/Task/trainquery.js",
+      "keys": [
+        "youth_start",
+        "youth_look"
+      ],
+      "repo": "https://github.com/Sunert/Script/blob/master/Task/youth_gain.js",
+      "id": "youthGain",
+      "script": "https://raw.githubusercontent.com/Sunert/Script/master/Task/youth_gain.js",
+      "name": "中青浏览赚&看看赚",
+      "icons": [
+        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Alpha/youth.png",
+        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/youth.png"
+      ]
+    },
+    {
+      "author": "@sunert",
+      "keys": [
+        "youth_autoread",
+        "autotime_zq"
+      ],
       "settings": [
         {
-          "items": [
-            {
-              "key": "ADULT",
-              "label": "成人"
-            },
-            {
-              "key": "0X00",
-              "label": "学生"
-            }
-          ],
-          "id": "people",
-          "val": "ADULT",
-          "name": "乘客类型",
-          "type": "radios",
-          "desc": "成人/学生"
-        },
-        {
-          "id": "left",
-          "val": "北京",
-          "name": "出发站点",
-          "type": "text",
-          "desc": "填入中文站点"
-        },
-        {
-          "id": "end",
-          "val": "上海",
-          "name": "目的地",
-          "type": "text",
-          "desc": "填入中文站点"
-        },
-        {
-          "id": "leavedate",
-          "val": "2020-08-15",
-          "name": "出发时间",
-          "type": "date",
-          "desc": "填入出发日期，请按照格式填写"
-        },
-        {
-          "id": "setrain",
-          "val": "G5",
-          "name": "列车车次",
-          "type": "text",
-          "desc": "填入列车车次或者列车序号，列车序号请查看日志详情"
+          "id": "youth_cut",
+          "val": false,
+          "name": "缩减请求",
+          "type": "boolean",
+          "desc": "自动删除收益为0或者错误的阅读请求，使用完后请立即关闭，避免清空阅读请求"
         }
       ],
-      "name": "列车时刻",
+      "repo": "https://github.com/Sunert/Script/blob/master/Task/Youth_Read.js",
+      "id": "youthRead",
+      "script": "https://raw.githubusercontent.com/Sunert/Script/master/Task/Youth_Read.js",
+      "name": "中青自动阅读",
       "icons": [
-        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Alpha/12306.png",
-        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/12306.png"
+        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Alpha/youth.png",
+        "https://cdn.jsdelivr.net/gh/Orz-3/mini@master/Color/youth.png"
       ]
     }
   ]

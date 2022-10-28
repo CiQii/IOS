@@ -1,6 +1,6 @@
 /*
 抖音极速版
-功能：签到（有点问题），限时广告，首页宝箱，宝箱广告，直播宝箱，提现0.3，提交步数
+功能：限时广告，首页宝箱，宝箱广告，直播宝箱，提现0.3，提交步数
 
 hostname = *.amemv.com,*.snssdk.com
 
@@ -9,19 +9,34 @@ hostname = *.amemv.com,*.snssdk.com
 /luckycat/aweme/v1/task/page? url script-request-header dyLite.js
 
 #签到（有问题
-/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dyLite.js
+/luckycat/aweme/v1/task/sign_in/* url script-request-header dy_lite.js
 
 #步数
-/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dyLite.js
+/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dy_lite.js
 
 #红包进度条，首页宝箱，宝箱广告，直播宝箱
-luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box|live_treasure)? url script-request-header dyLite.js
+luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box|live_treasure)? url script-request-header dy_lite.js
 */
 
 
 const jsname = '抖音极速版'
 const $ = Env(jsname)
 const notify = $.isNode() ? require('./sendNotify') : '';
+
+$.idx = "2";//账号扩展字符
+let dyhost = ($.getdata('dyhost') || 'api5-normal-c-lf.amemv.com');
+let dyjsbaccount;
+let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
+const invite = 0;//新用户自动邀请，0关闭，1默认开启
+const logs = 0;//0为关闭日志，1为开启
+var hour = ''
+var minute = ''
+const readbody = `{
+  "in_sp_time": 0,
+  "task_key": "read"
+}`
+
+
 const adsheaderArr = [], adskeyArr = []
 const boxheaderArr = [], boxkeyArr = []
 const boxadsheaderArr = [], boxadskeyArr = []
@@ -55,36 +70,24 @@ let stepkey = $.getdata('dylite_step_key')
 let readheader = $.getdata('dylite_read_header')
 let readkey = $.getdata('dylite_read_key')
 
-let dyhost = ($.getdata('dyhost') || 'api5-normal-c-lf.amemv.com')
-let dyjsbaccount;
-let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
-const invite = 0;//新用户自动邀请，0关闭，1默认开启
-const logs = 0;//0为关闭日志，1为开启
-var hour = ''
-var minute = ''
-const readbody = `{
-  "in_sp_time": 0,
-  "task_key": "read"
-}`
+
 if ($.isNode()) {
-   // hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
-    //minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
-  
     hour = (new Date()).getHours();
     minute = (new Date()).getMinutes();
-  
+
 } else {
     hour = (new Date()).getHours();
     minute = (new Date()).getMinutes();
 }
-//CK运行
 
+//CK运行
 let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
     GetCookie();
     $.done()
 }
 if ($.isNode()) {
+
     //ads
     if (process.env.DY_ADS_HEADER && process.env.DY_ADS_HEADER.indexOf('#') > -1) {
         adsheader = process.env.DY_ADS_HEADER.split('#');
@@ -95,7 +98,6 @@ if ($.isNode()) {
     } else {
         adsheader = process.env.DY_ADS_HEADER.split()
     }
-    ;
 
     if (process.env.DY_ADS_KEY && process.env.DY_ADS_KEY.indexOf('#') > -1) {
         adskey = process.env.DY_ADS_KEY.split('#');
@@ -106,7 +108,7 @@ if ($.isNode()) {
     } else {
         adskey = process.env.DY_ADS_KEY.split()
     }
-    ;
+
     //box
     if (process.env.DY_BOX_HEADER && process.env.DY_BOX_HEADER.indexOf('#') > -1) {
         boxheader = process.env.DY_BOX_HEADER.split('#');
@@ -117,7 +119,7 @@ if ($.isNode()) {
     } else {
         boxheader = process.env.DY_BOX_HEADER.split()
     }
-    ;
+
 
     if (process.env.DY_BOX_KEY && process.env.DY_BOX_KEY.indexOf('#') > -1) {
         boxkey = process.env.DY_BOX_KEY.split('#');
@@ -128,7 +130,7 @@ if ($.isNode()) {
     } else {
         boxkey = process.env.DY_BOX_KEY.split()
     }
-    ;
+
     //boxads
     if (process.env.DY_BOX_ADS_HEADER && process.env.DY_BOX_ADS_HEADER.indexOf('#') > -1) {
         boxadsheader = process.env.DY_BOX_ADS_HEADER.split('#');
@@ -139,7 +141,7 @@ if ($.isNode()) {
     } else {
         boxadsheader = process.env.DY_BOX_ADS_HEADER.split()
     }
-    ;
+
     if (process.env.DY_BOX_ADS_KEY && process.env.DY_BOX_ADS_KEY.indexOf('#') > -1) {
         boxadskey = process.env.DY_BOX_ADS_KEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
@@ -149,7 +151,7 @@ if ($.isNode()) {
     } else {
         boxadskey = process.env.DY_BOX_ADS_KEY.split()
     }
-    ;
+
     //info
     if (process.env.DY_INFO_HEADER && process.env.DY_INFO_HEADER.indexOf('#') > -1) {
         infoheader = process.env.DY_INFO_HEADER.split('#');
@@ -160,7 +162,7 @@ if ($.isNode()) {
     } else {
         infoheader = process.env.DY_INFO_HEADER.split()
     }
-    ;
+
     if (process.env.DY_INFO_KEY && process.env.DY_INFO_KEY.indexOf('#') > -1) {
         infokey = process.env.DY_INFO_KEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
@@ -170,7 +172,7 @@ if ($.isNode()) {
     } else {
         infokey = process.env.DY_INFO_KEY.split()
     }
-    ;
+
     //live
     if (process.env.DY_LIVE_HEADER && process.env.DY_LIVE_HEADER.indexOf('#') > -1) {
         liveheader = process.env.DY_LIVE_HEADER.split('#');
@@ -181,7 +183,7 @@ if ($.isNode()) {
     } else {
         liveheader = process.env.DY_LIVE_HEADER.split()
     }
-    ;
+
     if (process.env.DY_LIVE_KEY && process.env.DY_LIVE_KEY.indexOf('#') > -1) {
         livekey = process.env.DY_LIVE_KEY.split('#');
         console.log(`您选择的是用"#"隔开\n`)
@@ -191,7 +193,7 @@ if ($.isNode()) {
     } else {
         livekey = process.env.DY_LIVE_KEY.split()
     }
-    ;
+
 //sign
     if (process.env.DY_SIGN_HEADER && process.env.DY_SIGN_HEADER.indexOf('#') > -1) {
         signheader = process.env.DY_SIGN_HEADER.split('#');
@@ -202,7 +204,7 @@ if ($.isNode()) {
     } else {
         signheader = process.env.DY_SIGN_HEADER.split()
     }
-    ;
+
     if (process.env.DY_SIGN_COOKIE && process.env.DY_SIGN_COOKIE.indexOf('#') > -1) {
         signcookie = process.env.DY_SIGN_COOKIE.split('#');
     } else if (process.env.DY_SIGN_COOKIE && process.env.DY_SIGN_COOKIE.split('\n').length > 0) {
@@ -210,7 +212,7 @@ if ($.isNode()) {
     } else {
         signcookie = process.env.DY_SIGN_COOKIE.split()
     }
-    ;
+
 //step
     if (process.env.DY_STEP_HEADER && process.env.DY_STEP_HEADER.indexOf('#') > -1) {
         stepheader = process.env.DY_STEP_HEADER.split('#');
@@ -221,7 +223,7 @@ if ($.isNode()) {
     } else {
         stepheader = process.env.DY_STEP_HEADER.split()
     }
-    ;
+
     if (process.env.DY_STEP_KEY && process.env.DY_STEP_KEY.indexOf('#') > -1) {
         stepkey = process.env.DY_STEP_KEY.split('#');
     } else if (process.env.DY_STEP_KEY && process.env.DY_STEP_KEY.split('\n').length > 0) {
@@ -229,7 +231,7 @@ if ($.isNode()) {
     } else {
         stepkey = process.env.DY_STEP_KEY.split()
     }
-    ;
+
 //read
     if (process.env.DY_READ_HEADER && process.env.DY_READ_HEADER.indexOf('#') > -1) {
         readheader = process.env.DY_READ_HEADER.split('#');
@@ -240,7 +242,7 @@ if ($.isNode()) {
     } else {
         readheader = process.env.DY_READ_HEADER.split()
     }
-    ;
+
     if (process.env.DY_READ_KEY && process.env.DY_READ_KEY.indexOf('#') > -1) {
         readkey = process.env.DY_READ_KEY.split('#');
     } else if (process.env.DY_READ_KEY && process.env.DY_READ_KEY.split('\n').length > 0) {
@@ -248,7 +250,7 @@ if ($.isNode()) {
     } else {
         readkey = process.env.DY_READ_KEY.split()
     }
-    ;
+
     //ads
     Object.keys(adsheader).forEach((item) => {
         if (adsheader[item]) {
@@ -337,9 +339,8 @@ if ($.isNode()) {
             readkeyArr.push(readkey[item])
         }
     });
-  console.log(`============ 脚本执行-北京时间(UTC)：${new Date().toLocaleString()}  =============\n`)
-    //console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
-    //console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
+    console.log(`============ 脚本执行-北京时间(UTC)：${new Date().toLocaleString()}  =============\n`)
+
 } else {
     adsheaderArr.push($.getdata('dylite_ads_header'))
     adskeyArr.push($.getdata('dylite_adskey'))
@@ -443,120 +444,124 @@ function GetCookie() {
 //限时广告
     if ($request && $request.url.indexOf("aweme" && "excitation_ad") >= 0) {
         const adsheader = $request.url.split(`?`)[1]
-        if (adsheader) $.setdata(adsheader, 'dylite_ads_header')
-        $.log(`[${jsname}] 获取ads请求: 成功, adsheader: ${adsheader}`)
-        $.msg(`获取adsheader: 成功🎉`, ``)
+        if (adsheader) $.setdata(adsheader, `dylite_ads_header ${$.idx}`)
+        $.log(`[${jsname}] 获取ads请求: 成功, dylite_ads_header: ${adsheader}`)
+        $.msg(`获取dylite_ads_header ${$.idx}: 成功🎉`, ``)
         const adskey = JSON.stringify($request.headers)
-        if (adskey) $.setdata(adskey, 'dylite_ads_key')
-        $.log(`[${jsname}] 获取ads请求: 成功, adskey: ${adskey}`)
-        $.msg(`获取adskey: 成功🎉`, ``)
+        if (adskey) $.setdata(adskey, `dylite_ads_key ${$.idx}`)
+        $.log(`[${jsname}] 获取ads请求: 成功, dylite_ads_key: ${adskey}`)
+        $.msg(`获取dylite_ads_key ${$.idx}: 成功🎉`, ``)
     }
 
 //首页宝箱
     if ($request && $request.url.indexOf("aweme" && "treasure_task") >= 0) {
         const boxheader = $request.url.split(`?`)[1]
-        if (boxheader) $.setdata(boxheader, 'dylite_box_header')
-        $.log(`[${jsname}] 获取box请求: 成功, boxheader: ${boxheader}`)
-        $.msg(`获取boxheader: 成功🎉`, ``)
+        if (boxheader) $.setdata(boxheader, `dylite_box_header ${$.idx}`)
+        $.log(`[${jsname}] 获取box请求: 成功, dylite_box_header: ${boxheader}`)
+        $.msg(`获取dylite_box_header ${$.idx}: 成功🎉`, ``)
         const boxkey = JSON.stringify($request.headers)
-        if (boxkey) $.setdata(boxkey, 'dylite_box_key')
-        $.log(`[${jsname}] 获取box请求: 成功, boxkey: ${boxkey}`)
-        $.msg(`获取boxkey: 成功🎉`, ``)
+        if (boxkey) $.setdata(boxkey, `dylite_box_key ${$.idx}`)
+        $.log(`[${jsname}] 获取box请求: 成功, dylite_box_key: ${boxkey}`)
+        $.msg(`获取dylite_box_key ${$.idx}: 成功🎉`, ``)
     }
 
 //宝箱广告
     if ($request && $request.url.indexOf("aweme" && "_treasure_box") >= 0) {
         const boxadsheader = $request.url.split(`?`)[1]
-        if (boxadsheader) $.setdata(boxadsheader, 'dylite_box_ads_header')
-        $.log(`[${jsname}] 获取boxads请求: 成功, boxadsheader: ${boxadsheader}`)
-        $.msg(`获取boxadsheader: 成功🎉`, ``)
+        if (boxadsheader) $.setdata(boxadsheader, `dylite_box_ads_header${$.idx}`)
+        $.log(`[${jsname}] 获取boxads请求: 成功, dylite_box_ads_header: ${boxadsheader}`)
+        $.msg(`获取dylite_box_ads_header${$.idx}: 成功🎉`, ``)
         const boxadskey = JSON.stringify($request.headers)
-        if (boxadskey) $.setdata(boxadskey, 'dylite_box_ads_key')
-        $.log(`[${jsname}] 获取boxads请求: 成功, boxadskey: ${boxadskey}`)
-        $.msg(`获取boxadskey: 成功🎉`, ``)
+        if (boxadskey) $.setdata(boxadskey, `dylite_box_ads_key${$.idx}`)
+        $.log(`[${jsname}] 获取boxads请求: 成功, dylite_box_ads_key: ${boxadskey}`)
+        $.msg(`获取dylite_box_ads_key${$.idx}: 成功🎉`, ``)
     }
 //直播宝箱
     if ($request && $request.url.indexOf("aweme" && "live_treasure") >= 0) {
         const liveheader = $request.url.split(`?`)[1]
-        if (liveheader) $.setdata(liveheader, 'dylite_live_header')
-        $.log(`[${jsname}] 获取live请求: 成功, liveheader: ${liveheader}`)
-        $.msg(`获取liveheader: 成功🎉`, ``)
+        if (liveheader) $.setdata(liveheader, `dylite_live_header${$.idx}`)
+        $.log(`[${jsname}] 获取live请求: 成功, dylite_live_header: ${liveheader}`)
+        $.msg(`获取dylite_live_header${$.idx}: 成功🎉`, ``)
         const livekey = JSON.stringify($request.headers)
-        if (livekey) $.setdata(livekey, 'dylite_live_key')
-        $.log(`[${jsname}] 获取live请求: 成功, livekey: ${livekey}`)
-        $.msg(`获取livekey: 成功🎉`, ``)
+        if (livekey) $.setdata(livekey, `dylite_live_key${$.idx}`)
+        $.log(`[${jsname}] 获取live请求: 成功, dylite_live_key: ${livekey}`)
+        $.msg(`获取dylite_live_key${$.idx}: 成功🎉`, ``)
     }
     //显示总音符
     if ($request && $request.url.indexOf("page") >= 0) {
         const infoheader = $request.url.split(`?`)[1]
-        if (infoheader) $.setdata(infoheader, 'dylite_info_header')
-        $.log(`[${jsname}] 获取info请求: 成功,infoheader: ${infoheader}`)
-        $.msg(`获取infoheader: 成功🎉`, ``)
+        if (infoheader) $.setdata(infoheader, `dylite_info_header${$.idx}`)
+        $.log(`[${jsname}] 获取info请求: 成功,dylite_info_header: ${infoheader}`)
+        $.msg(`获取dylite_info_header${$.idx}: 成功🎉`, ``)
         const infokey = JSON.stringify($request.headers)
-        if (infokey) $.setdata(infokey, 'dylite_info_key')
-        $.log(`[${jsname}] 获取info请求: 成功,infokey: ${infokey}`)
-        $.msg(`获取infokey: 成功🎉`, ``)
+        if (infokey) $.setdata(infokey, `dylite_info_key${$.idx}`)
+        $.log(`[${jsname}] 获取info请求: 成功,dylite_info_key: ${infokey}`)
+        $.msg(`获取dylite_info_key${$.idx}: 成功🎉`, ``)
     }
     //签到
     if ($request && $request.url.indexOf("sign_in") >= 0) {
         const signheader = $request.url.split(`?`)[1]
-        if (signheader) $.setdata(signheader, 'dylite_sign_header')
-        $.log(`[${jsname}] 获取sign请求: 成功,signheader: ${signheader}`)
-        $.msg(`获取signheader: 成功🎉`, ``)
+        if (signheader) $.setdata(signheader, `dylite_sign_header${$.idx}`)
+        $.log(`[${jsname}] 获取sign请求: 成功,dylite_sign_header: ${signheader}`)
+        $.msg(`获取dylite_sign_header${$.idx}: 成功🎉`, ``)
         const signcookie = $request.headers['Cookie']
-        if (signcookie) $.setdata(signcookie, 'dylite_sign_cookie')
-        $.log(`[${jsname}] 获取sign请求: 成功,signcookie: ${signcookie}`)
-        $.msg(`获取signcookie: 成功🎉`, ``)
+        if (signcookie) $.setdata(signcookie, `dylite_sign_cookie${$.idx}`)
+        $.log(`[${jsname}] 获取sign请求: 成功,dylite_sign_cookie: ${signcookie}`)
+        $.msg(`获取dylite_sign_cookie${$.idx}: 成功🎉`, ``)
     }
     //走路
     if ($request && $request.url.indexOf("step_submit") >= 0) {
         const stepheader = $request.url.split(`?`)[1]
-        if (stepheader) $.setdata(stepheader, 'dylite_step_header')
-        $.log(`[${jsname}] 获取step请求: 成功,stepheader: ${stepheader}`)
-        $.msg(`获取stepheader: 成功🎉`, ``)
+        if (stepheader) $.setdata(stepheader, `dylite_step_header${$.idx}`)
+        $.log(`[${jsname}] 获取step请求: 成功,dylite_step_header: ${stepheader}`)
+        $.msg(`获取dylite_step_header${$.idx}: 成功🎉`, ``)
         const stepkey = JSON.stringify($request.headers)
-        if (stepkey) $.setdata(stepkey, 'dylite_step_key')
-        $.log(`[${jsname}] 获取step请求: 成功,stepkey: ${stepkey}`)
-        $.msg(`获取stepkey: 成功🎉`, ``)
+        if (stepkey) $.setdata(stepkey, `dylite_step_key${$.idx}`)
+        $.log(`[${jsname}] 获取step请求: 成功,dylite_step_key: ${stepkey}`)
+        $.msg(`获取dylite_step_key${$.idx}: 成功🎉`, ``)
     }
     //刷视频
     if ($request && $request.url.indexOf("done/read") >= 0) {
         const readheader = $request.url.split(`?`)[1]
-        if (readheader) $.setdata(readheader, 'dylite_read_header')
-        $.log(`[${jsname}] 获取read请求: 成功,readheader: ${readheader}`)
-        $.msg(`获取readheader: 成功🎉`, ``)
+        if (readheader) $.setdata(readheader, `dylite_read_header${$.idx}`)
+        $.log(`[${jsname}] 获取read请求: 成功,dylite_read_header: ${readheader}`)
+        $.msg(`获取dylite_read_header${$.idx}: 成功🎉`, ``)
         const readkey = JSON.stringify($request.headers)
-        if (readkey) $.setdata(readkey, 'dylite_read_key')
-        $.log(`[${jsname}] 获取read请求: 成功,readkey: ${readkey}`)
-        $.msg(`获取readkey: 成功🎉`, ``)
+        if (readkey) $.setdata(readkey, `dylite_read_key${$.idx}`)
+        $.log(`[${jsname}] 获取read请求: 成功,dylite_read_key: ${readkey}`)
+        $.msg(`获取dylite_read_key${$.idx}: 成功🎉`, ``)
     }
 }
 
 async function control() {
-       
+
+
     await $.wait(1000);
     await query_info();
+    await $.wait(2000);
+    await watch_ads();
     await $.wait(1000);
     await open_box();
     await $.wait(2000);
     await watch_box_ads();
-  
+
     if (hour <= 2) {
-      await $.wait(2000);
-      await open_live_box()
-    
+        await $.wait(2000);
+        await open_live_box()
+
     }
-    if (hour == 11 && minute <= 10) {
-      await $.wait(1000);
-      await withdraw();
-      await $.wait(1000);
-      await sign_in()
-      await $.wait(1000);
-      await step_submit();
-      await $.wait(1000);
-      await step_reward();
-      await $.wait(1000);
+    if (hour == 12 && minute <= 10) {
+        await $.wait(1000);
+        await withdraw();
+        await $.wait(1000);
+        //await sign_in()
+        //await $.wait(1000);
+        await step_submit();
+        await $.wait(1000);
+        await step_reward();
+        await $.wait(1000);
     }
+
 }
 
 
@@ -779,7 +784,7 @@ function watch_video() {
         })
     })
 }
-//withdraw alipay 0.3
+//提现 支付宝 0.3
 function withdraw() {
     return new Promise((resolve, reject) => {
         let withdrawurl ={
@@ -829,12 +834,12 @@ async function showmsg() {
     if (tz == 1) {
         if ($.isNode()) {
             $.log(message)
-            if (hour == 11 && minute <= 10) {
+            if ((hour == 12 && minute <= 10) || (hour == 23 && minute >= 54)) {
                 await notify.sendNotify($.name, message)
             }
         } else {
             $.log(message)
-            if ((hour == 12 && minute <= 20) || (hour == 23 && minute >= 40)) {
+            if ((hour == 12 && minute <= 10) || (hour == 23 && minute >= 54)) {
                 $.msg(jsname, '', message)
             }
         }

@@ -14,9 +14,9 @@ http-request https:\/\/ios\.baertt\.com\/v5\/\w+\/withdraw\d?\.json script-path=
 # > 看看赚
 cron "6 7 * * *" script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, enabled=false, tag=中青看点📖浏览赚, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
 
-http-request https:\/\/ios\.baertt\.com\/v5\/task\/browse_start\.json script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, requires-body=true, enabled=true, tag=获取浏览赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+http-request https:\/\/ios\.baertt\.com\/v5\/task\/browse_start\.json script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/youth_banner.js, requires-body=true, enabled=true, tag=获取浏览赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
 
-http-request https:\/\/ios\.baertt\.com\/v5\/Nameless\/adlickstart\.json script-path=https://fastly.jsdelivr.net/gh/ztxtop/x/youth_banner.js, requires-body=true, enabled=true, tag=获取看看赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
+http-request https:\/\/ios\.baertt\.com\/v5\/Nameless\/adlickstart\.json script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/youth_banner.js, requires-body=true, enabled=true, tag=获取看看赚数据, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/youth.png
 
 [Mitm]
 hostname = ios.baertt.com, kd.youth.cn

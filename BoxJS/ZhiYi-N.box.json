@@ -92,7 +92,23 @@
         "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/dyjsb-mini.png",
         "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/dyjsb.png"
       ],
-      "script": "https://github.com/CiQii/ZhiYi-N/raw/master/dyjsb.js"
+      "script": "https://raw.githubusercontent.com/CiQii/IOS/master/JS/dy_lite.js"
+    },
+    {
+      "name": "抖音极速版自动刷视频",
+      "id":"dyjsbRead",
+      "author": "@passerby-b",
+      "icon": "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/ZhiYi-N.png",
+      "keys": [
+        "dyjs"
+      ],
+      "settings": [],
+      "repo": "https://gitee.com/passerby-b/javascript/",
+      "icons": [
+      "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/dyjsb-mini.png",
+      "https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/img/dyjsb.png"
+    ],
+      "script": "https://raw.githubusercontent.com/CiQii/IOS/master/JS/dy_lite_read.js"
     },
     {
       "id": "fqxs",

@@ -22,9 +22,5 @@ luckycat/aweme/v1/task/done/read https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/dy_
 cron "*/30 * * * * *" script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/dy_lite_read.js,tag=抖音极速版刷音符
 
 
-http-request luckycat/novel/v1/task/sign_in/* script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/tomatoesNovel.js,tag=番茄小说获取签到数据
-
-http-request luckycat/novel/v1/task/done/excitation_ad_treasure_box/* script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/tomatoesNovel.js,tag=番茄小说获取宝箱数据
-
 [Mitm]
-hostname = api.yuncheapp.cn,*.amemv.com,*.snssdk.com
+hostname = *.amemv.com,*.snssdk.com

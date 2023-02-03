@@ -2,7 +2,7 @@
 
 [Script]
 
-#抖音极速版-zhiyi&&xqf
+#抖音极速版
 # > 个人信息
 http-request /luckycat/aweme/v1/task/page? script-path=https://fastly.jsdelivr.net/gh/CiQii/IOS/JS/dy_lite_old.js, timeout=10, enabled=false, tag=抖音极速版获取个人信息
 # > 签到

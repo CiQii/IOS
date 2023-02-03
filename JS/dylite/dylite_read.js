@@ -1,5 +1,5 @@
 //重写添加成功后刷视频,等红包进度圈满后就会提示获取header成功,多获取几个header,最好获取五十个以上,多多益善
-//获取多个header成功后再定时循环执行脚本任务,间隔时间最好在30s以上,每天稳定在10000音符左右
+//获取多个header成功后再定时循环执行脚本任务,间隔时间最好在30s以上
 //且刷且珍惜,刷的别太嚣张,说不定过几天就封了
 //如果需要在服务器上用nodejs运行则需要用boxjs把缓dyheadlist导出放到相同路径文件下下dyjs.json文件里
 //TG群:https://t.me/joinchat/wH4Ks3mT6mxiMDg1
@@ -9,15 +9,15 @@
 
 //==========================Quantumultx=========================
 // [task_local]
-// */30 * * * * * https://gitee.com/passerby-b/javascript/raw/master/dyjs.js, tag=抖音极速版刷音符, enabled=true
+// */30 * * * * * https://github.com/CiQii/IOS/raw/master/JS/dylite/dylite_read.js, tag=抖音极速版刷音符, enabled=true
 
 // [rewrite_local]
-// luckycat/aweme/v1/task/done/read? url script-request-header https://gitee.com/passerby-b/javascript/raw/master/dyjs.js
+// luckycat/aweme/v1/task/done/read? url script-request-header https://github.com/CiQii/IOS/raw/master/JS/dylite/dylite_read.js
 
 // =========================Loon=============================
 // [Script]
-// http-request luckycat/aweme/v1/task/done/read script-path=https://gitee.com/passerby-b/javascript/raw/master/dyjs.js, requires-body=true, timeout=10, tag=抖音极速
-// cron "*/30 * * * * *" script-path=https://gitee.com/passerby-b/javascript/raw/master/dyjs.js,tag=抖音极速版刷音符
+// http-request luckycat/aweme/v1/task/done/read script-path=https://github.com/CiQii/IOS/raw/master/JS/dylite/dylite_read.js, requires-body=true, timeout=10, tag=抖音极速
+// cron "*/30 * * * * *" script-path=https://github.com/CiQii/IOS/raw/master/JS/dylite/dylite_read.js,tag=抖音极速版刷音符
 
 var isShowCionDetail = false;//显示收益详情
 

@@ -1,0 +1,14 @@
+hostname = *.amemv.com,*.snssdk.com
+
+[rewrite_local]
+#总音符
+/luckycat/aweme/v1/task/page? url script-request-header dylite.js
+
+#签到（用于提现0.3,并不能签到
+/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dylite.js
+
+#步数
+/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dylite.js
+
+#视频时长，首页宝箱，宝箱广告
+luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box)? url script-request-header dylite.js

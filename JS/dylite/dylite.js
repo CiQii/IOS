@@ -1,21 +1,8 @@
 /*
 抖音极速版
-功能：签到（有点问题），限时广告，首页宝箱，宝箱广告，提现0.3，提交步数
+实现功能：观看限时广告，宝箱广告，打开首页宝箱，每日提现0.3，提交步数并领取奖励
+QuanX重写链接: https://github.com/CiQii/IOS/raw/master/QuanX/Rewrite/dylite.snippet
 ps:一机一号
-hostname = *.amemv.com,*.snssdk.com
-
-[rewrite_local]
-#总音符
-/luckycat/aweme/v1/task/page? url script-request-header dylite.js
-
-#签到（用于提现0.3,并不能签到
-/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dylite.js
-
-#步数
-/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dylite.js
-
-#视频时长，首页宝箱，宝箱广告
-luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box)? url script-request-header dylite.js
 */
 
 

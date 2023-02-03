@@ -1,21 +1,21 @@
 /*
 抖音极速版
 功能：签到（有点问题），限时广告，首页宝箱，宝箱广告，提现0.3，提交步数
-
+ps:一机一号
 hostname = *.amemv.com,*.snssdk.com
 
 [rewrite_local]
 #总音符
-/luckycat/aweme/v1/task/page? url script-request-header dyLite.js
+/luckycat/aweme/v1/task/page? url script-request-header dylite.js
 
-#签到（有问题
-/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dyLite.js
+#签到（用于提现0.3,并不能签到
+/luckycat/aweme/v1/task/sign_in/detail? url script-request-header dylite.js
 
 #步数
-/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dyLite.js
+/luckycat/aweme/v1/task/walk/step_submit? url script-request-header dylite.js
 
-#红包进度条，首页宝箱，宝箱广告
-luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box)? url script-request-header dyLite.js
+#视频时长，首页宝箱，宝箱广告
+luckycat/aweme/v1/task/done/(read|excitation_ad|treasure_task|excitation_ad_treasure_box)? url script-request-header dylite.js
 */
 
 
@@ -254,8 +254,6 @@ if ($.isNode()) {
             infokeyArr.push(infokey[item])
         }
     });
-    //live
-    
 //sign
     Object.keys(signheader).forEach((item) => {
         if (signheader[item]) {
@@ -585,29 +583,6 @@ function query_info() {
     })
 }
 
-//签到
-function sign_in() {
-    return new Promise((resolve, reject) => {
-        let sign_inurl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/done/sign_in?${signheader}`,
-            headers: {
-                Cookie: signcookie,
-                'User-Agent': 'AwemeLite 14.9.0 rv:149005 (iPhone; iOS 14.4.2; zh_CN) Cronet'
-            }
-        }
-        $.post(sign_inurl, (error, response, data) => {
-            const result = JSON.parse(data)
-            if (logs) $.log(data)
-            message += '📣签到\n'
-            if (result.err_no == 10006) {
-                message += '🎉' + result.err_tips + '\n'
-            } else {
-                message += '⚠️' + result.err_tips + '\n'
-            }
-            resolve()
-        })
-    })
-}
 
 //提交步数
 function step_submit() {
@@ -660,34 +635,6 @@ function step_reward() {
     })
 }
 
-//看视频
-function watch_video() {
-    return new Promise((resolve, reject) => {
-        let watch_videourl = {
-            url: `https://${dyhost}/luckycat/aweme/v1/task/done/read?${readheader}`,
-            headers: JSON.parse(readkey),
-            body: `{
-  "in_sp_time" : 0,
-  "task_key" : "read"
-}`
-        }
-        $.post(watch_videourl, (error, response, data) => {
-            const result = JSON.parse(data)
-            if (logs) $.log(data)
-            message += '📣看视频\n'
-            if (result.err_no == 0) {
-                message += '🎉' + result.err_tips + '获得:' + result.data.score_amount + "\n"
-            } else if (result.err_no == 10006) {
-                message += '⚠️已经读过了\n'
-            } else {
-                message += '⚠️' + result.err_tips + '\n' + '请重新获取readkey\n'
-                let other = '⚠️' + result.err_tips + '请重新获取readkey\n'
-                $.msg(jsname, '', other)
-            }
-            resolve()
-        })
-    })
-}
 //withdraw alipay 0.3
 function withdraw() {
     return new Promise((resolve, reject) => {

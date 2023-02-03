@@ -37,7 +37,7 @@ var link1 = link0.split("#")[0]
 const qxpng = "https://raw.githubusercontent.com/crossutility/Quantumult-X/master/quantumult-x.png" // server sub-info link
 const subinfo_link = { "open-url": "https://t.me/QuanX_API", "media-url": "https://shrtm.nu/ebAr" };
 const subinfo_link1 = { "open-url": link1, "media-url": "https://shrtm.nu/uo13" } // server sub-info link(fake-nodes)
-const rwrite_link = { "open-url": link1, "media-url": "https://shrtm.nu/x3o2" } // rewrite filter link
+const rwrite_link = { "open-url": link1, "media-url": "https://shrtm.nu/x3o2" } // Rewrite filter link
 const rwhost_link = { "open-url": link1, "media-url": "https://shrtm.nu/0n5J" } // hostname filter link
 const rule_link = { "open-url": link1, "media-url": "https://shrtm.nu/cpHD" } // rule filter link
 const nan_link = { "open-url": link1, "media-url": qxpng } // nan error link
@@ -56,7 +56,7 @@ var Preg = mark0 && para1.indexOf("regex=") != -1 ? decodeURIComponent(para1.spl
 var Pregdel = mark0 && para1.indexOf("delreg=") != -1 ? decodeURIComponent(para1.split("delreg=")[1].split("&")[0]) : null; // 正则删除参数
 var Phin0 = mark0 && para1.indexOf("inhn=") != -1 ? (para1.split("inhn=")[1].split("&")[0].split("+")).map(decodeURIComponent) : null; //hostname 
 var Phout0 = mark0 && para1.indexOf("outhn=") != -1 ? (para1.split("outhn=")[1].split("&")[0].split("+")).map(decodeURIComponent) : null; //hostname
-var Preplace = mark0 && para1.indexOf("replace=") != -1 ? para1.split("replace=")[1].split("&")[0] : null; //filter/rewrite 正则替换
+var Preplace = mark0 && para1.indexOf("replace=") != -1 ? para1.split("replace=")[1].split("&")[0] : null; //filter/Rewrite 正则替换
 var Pemoji = mark0 && para1.indexOf("emoji=") != -1 ? para1.split("emoji=")[1].split("&")[0] : null;
 var Pudp0 = mark0 && para1.indexOf("udp=") != -1 ? para1.split("udp=")[1].split("&")[0] : 0;
 var Ptfo0 = mark0 && para1.indexOf("tfo=") != -1 ? para1.split("tfo=")[1].split("&")[0] : 0;
@@ -97,7 +97,7 @@ pat[6] = ["𝕒","𝕓","𝕔","𝕕","𝕖","𝕗","𝕘","𝕙","𝕚","𝕛",
 
 
 var type0=""
-//flag=1,2,3分别为 server、rewrite、rule 类型
+//flag=1,2,3分别为 server、Rewrite、rule 类型
 var flag = 1
 
 function Parser() {
@@ -153,7 +153,7 @@ function ResourceParse() {
     if (Preplace) { total = ReplaceReg(total, Preplace) }
     if (Pcdn) {total = CDN(total)}
     total = total.join("\n")
-  } else if (type0 == "rewrite") { // rewrite 类型
+  } else if (type0 == "Rewrite") { // Rewrite 类型
     flag = 2;
     total = Rewrite_Filter(isQuanXRewrite(content0.split("\n")), Pin0, Pout0,Preg);
     if (Preplace) { total = ReplaceReg(total, Preplace) }
@@ -307,8 +307,8 @@ function Type_Check(subs) {
       type = "Clash";
       content0 = Clash2QX(subs)
     } else if ((/hostname\=|pattern\=/.test(subs) || RewriteK.some(RewriteCheck)) && !/\[(Proxy|filter_local)\]/.test(subs) && para1.indexOf("dst=filter")==-1 && subi.indexOf("securehostname") == -1 && !/module|nodes/.test(typeU)) {
-      type = "rewrite" //Quantumult X 类型 rewrite/ Surge Script/
-    } else if ( (((ModuleK.some(RewriteCheck) || para1.indexOf("dst=rewrite") != -1) && (para1.indexOf("dst=filter") == -1) && subs.indexOf("[Proxy]") == -1) || typeU == "module") && typeU != "nodes") { // Surge 类型 module /rule-set(含url-regex) 类型
+      type = "Rewrite" //Quantumult X 类型 Rewrite/ Surge Script/
+    } else if ( (((ModuleK.some(RewriteCheck) || para1.indexOf("dst=Rewrite") != -1) && (para1.indexOf("dst=filter") == -1) && subs.indexOf("[Proxy]") == -1) || typeU == "module") && typeU != "nodes") { // Surge 类型 module /rule-set(含url-regex) 类型
       type = "sgmodule"
     } else if (((RuleK.some(RuleCheck) && subs.indexOf(html) == -1 && !/\[(Proxy|server_local)\]/.test(subs)) || typeU == "rule" || para1.indexOf("dst=filter")!=-1) && typeU != "nodes") {
       type = "Rule";
@@ -535,7 +535,7 @@ function URX2QX(subs) {
     return nrw
 }
 
-//script&rewrite 转换成 Quantumult X
+//script&Rewrite 转换成 Quantumult X
 function SCP2QX(subs) {
   var nrw = []
   var rw = ""
@@ -568,23 +568,23 @@ function SCP2QX(subs) {
           rw = ptn + " url " + type + js
           nrw.push(rw)
         }
-      } else if (subs[i].indexOf(" 302") != -1 || subs[i].indexOf(" 307") != -1) { //rewrite 302&307 复写
+      } else if (subs[i].indexOf(" 302") != -1 || subs[i].indexOf(" 307") != -1) { //Rewrite 302&307 复写
         //tpe = subs[i].indexOf(" 302") != -1? "302":"307"
         rw = subs[i].split(" ")[0] + " url " + subs[i].split(" ")[2] + " " + subs[i].split(" ")[1].trim()
         //if(rw.indexOf("307")!=-1) {$notify("XX",subs[i],rw.split(" "))}
         nrw.push(rw)
-      } else if(subs[i].split(" ")[2] == "header") { // rewrite header 类型
+      } else if(subs[i].split(" ")[2] == "header") { // Rewrite header 类型
         var pget = subs[i].split(" ")[0].split(".com")[1]
         var pgetn = subs[i].split(" ")[1].split(".com")[1]
         rw = subs[i].split(" ")[0] + " url request-header ^GET " + pget +"(.+\\r\\n)Host:.+(\\r\\n) request-header GET " + pgetn + "$1Host: " + subs[i].split(" ")[1].split("://")[1].split(".com")[0] + ".com$2"
         nrw.push(rw)
-      } else if(subs[i].split(" ")[1] == "header-replace") { // rewrite header-replace 类型
+      } else if(subs[i].split(" ")[1] == "header-replace") { // Rewrite header-replace 类型
         console.log(subs[i])
         var pget = subs[i].split("header-replace")[1].split(":")[0].trim()
         var pgetn = subs[i].split("header-replace")[1].trim()
         rw = subs[i].split(" ")[0] + " url request-header " +"(.+\\r\\n)"+pget+":.+(\\r\\n) request-header " + "$1" + pgetn + "$2"
         nrw.push(rw)
-      } else if(subs[i].indexOf(" - reject") != -1) { // rewrite reject 类型
+      } else if(subs[i].indexOf(" - reject") != -1) { // Rewrite reject 类型
         rw = subs[i].split(" ")[0] + " url reject-200"
         nrw.push(rw)
       } else if (subs[i].indexOf("script-path") != -1) { //surge js 旧写法
@@ -612,7 +612,7 @@ function SCP2QX(subs) {
   }
   return nrw
 }
-// 如果 URL-Regex 跟 rewrite/script 都需要
+// 如果 URL-Regex 跟 Rewrite/script 都需要
 function SGMD2QX(subs) {
     var nrw0 = URX2QX(subs)
     var nrw1 = SCP2QX(subs)
@@ -636,7 +636,7 @@ function Rewrite_Filter(subs, Pin, Pout,Preg) {
                 continue;
             } else if (hnc == 0 && subii.indexOf("hostname=") == 0) { //hostname 部分
                 hostname = (Phin0 || Phout0) ? HostNamecheck(subi, Phin0, Phout0) : subi;//hostname 部分
-            } else if (subii.indexOf("hostname=") != 0) { //rewrite 部分
+            } else if (subii.indexOf("hostname=") != 0) { //Rewrite 部分
                 var inflag = Rcheck(subi, Pin);
                 var outflag = Rcheck(subi, Pout);
                 if (outflag == 1 || inflag == 0) {
@@ -653,9 +653,9 @@ function Rewrite_Filter(subs, Pin, Pout,Preg) {
         nowrite = dwrite.length <= 10 ? emojino[dwrite.length] : dwrite.length
         no1write = Nlist.length <= 10 ? emojino[Nlist.length] : Nlist.length
         if (Pin0 && no1write != " 0️⃣ ") { //有 in 参数就通知保留项目
-            $notify("🤖 " + "重写引用  ➟ " + "⟦" + subtag + "⟧", "⛔️ 筛选参数: " + pfi + pfo, "☠️ 重写 rewrite 中保留以下" + no1write + "个匹配项:" + "\n ⨷ " + Nlist.join("\n ⨷ "), rwrite_link)
+            $notify("🤖 " + "重写引用  ➟ " + "⟦" + subtag + "⟧", "⛔️ 筛选参数: " + pfi + pfo, "☠️ 重写 Rewrite 中保留以下" + no1write + "个匹配项:" + "\n ⨷ " + Nlist.join("\n ⨷ "), rwrite_link)
         } else if (dwrite.length > 0) {
-            $notify("🤖 " + "重写引用  ➟ " + "⟦" + subtag + "⟧", "⛔️ 筛选参数: " + pfi + pfo, "☠️ 重写 rewrite 中已禁用以下" + nowrite + "个匹配项:" + "\n ⨷ " + dwrite.join("\n ⨷ "), rwrite_link)
+            $notify("🤖 " + "重写引用  ➟ " + "⟦" + subtag + "⟧", "⛔️ 筛选参数: " + pfi + pfo, "☠️ 重写 Rewrite 中已禁用以下" + nowrite + "个匹配项:" + "\n ⨷ " + dwrite.join("\n ⨷ "), rwrite_link)
         }
     }
     if (Nlist.length == 0) { $notify("🤖 " + "重写引用  ➟ " + "⟦" + subtag + "⟧", "⛔️ 筛选参数: " + pfi + pfo, "⚠️ 筛选后剩余rewrite规则数为 0️⃣ 条, 请检查参数及原始链接", nan_link) }
@@ -851,7 +851,7 @@ function Domain2Rule(content) {
     return nlist.join("\n")
 }
 
-// 正则替换 filter/rewrite 的部分
+// 正则替换 filter/Rewrite 的部分
 // 用途：如 tiktok 换区: JP -> KR ，如淘宝比价脚本 -> lite 横幅通知版本
 function ReplaceReg(cnt, para) {
     var cnt0 = cnt//.join("\n")
@@ -1337,7 +1337,7 @@ function isQuanX(content) {
     return nlist
 }
 
-//surge script/rewrite - > quanx
+//surge script/Rewrite - > quanx
 function isQuanXRewrite(content) {
   cnt = content
   cnt0=[]

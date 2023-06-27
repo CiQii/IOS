@@ -1,4 +1,4 @@
-hostname= appwk.baidu.com,biz.caiyunapp.com,ticktick.com,dida365.com,api.revenuecat.com,app-measurement.com,*.googleapis.com,i.weread.qq.com,restore-access.indream.app
+hostname= appwk.baidu.com,biz.caiyunapp.com,ticktick.com,dida365.com,api.revenuecat.com,app-measurement.com,*.googleapis.com,i.weread.qq.com,restore-access.indream.app,pebblefan.com
 
 # > 百度文库☆解锁Vip@ddgksf2013
 ^https:\/\/appwk\.baidu\.com\/naapi\/user\/getinfo url script-response-body https://github.com/CiQii/IOS/raw/master/JS/baidu_library.js
@@ -19,4 +19,5 @@ hostname= appwk.baidu.com,biz.caiyunapp.com,ticktick.com,dida365.com,api.revenue
 # > Nicegram☆解锁Vip@ddgksf2013
 ^https?:\/\/restore-access\.indream\.app\/restoreAccess\?id=\d{5,10} url echo-response text/json echo-response nicegram_body.js
 
-
+# > 便了么 ☆解锁Vip@me
+https?:\/\/pebblefan\.com\/papi\/get_users\?user_seq_number=\d{5,10} url echo-response text/json echo-response pebblefan_body.js

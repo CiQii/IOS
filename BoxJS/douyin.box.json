@@ -24,23 +24,7 @@
         "dylite_step_header1",
         "dylite_step_key1",
         "dylite_read_header1",
-        "dylite_read_key1",
-        "dylite_ads_header2",
-        "dylite_ads_key2",
-        "dylite_box_header2",
-        "dylite_box_key2",
-        "dylite_box_ads_header2",
-        "dylite_box_ads_key2",
-        "dylite_info_header2",
-        "dylite_info_key2",
-        "dylite_live_header2",
-        "dylite_live_key2",
-        "dylite_sign_header2",
-        "dylite_sign_cookie2",
-        "dylite_step_header2",
-        "dylite_step_key2",
-        "dylite_read_header2",
-        "dylite_read_key2"
+        "dylite_read_key1"
       ],
       "author": "@ZhiYi-N",
       "settings": [
@@ -53,17 +37,10 @@
         },
         {
           "id": "dyjsbaccount0",
-          "name": "支付宝账号1",
+          "name": "支付宝账号",
           "val": "0",
           "type": "number",
           "desc": "测试的为手机号，邮箱不知道（为适应for循环，被迫命名dyjsbaccount0）"
-        },
-        {
-          "id": "dyjsbaccount1",
-          "name": "支付宝账号2",
-          "val": "0",
-          "type": "number",
-          "desc": "测试的为手机号，邮箱不知道"
         },
         {
           "id": "tz",
@@ -120,19 +97,7 @@
         "fqxstoken",
         "fqxsua",
         "fqxsbxurl",
-        "fqxsxsscookie",
-        "fqxsurl2",
-        "fqxscookie2",
-        "fqxstoken2",
-        "fqxsua2",
-        "fqxsbxurl2",
-        "fqxsxsscookie2",
-        "fqxsurl3",
-        "fqxscookie3",
-        "fqxstoken3",
-        "fqxsua3",
-        "fqxsbxurl3",
-        "fqxsxsscookie3"
+        "fqxsxsscookie"
       ],
       "settings": [
         {

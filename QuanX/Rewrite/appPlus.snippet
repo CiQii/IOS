@@ -1,4 +1,4 @@
-hostname = testflight.apple.com,oauth.secure.pixiv.net,supjav.com
+hostname = testflight.apple.com,oauth.secure.pixiv.net,supjav.com,missav.com
 
 # > testflight解锁区域限制@NobyDa
 ^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$ url script-request-body https://raw.githubusercontent.com/CiQii/IOS/master/JS/testfight.js
@@ -15,3 +15,5 @@ hostname = testflight.apple.com,oauth.secure.pixiv.net,supjav.com
 ^https?:\/\/static\.adxadserv\.com url reject
 ^https?:\/\/help\.fanza\.cc url reject
 ^https?:\/\/go\.mnaspm\.com url reject
+
+^https?:\/\/missav\.com\/. url script-response-body https://raw.githubusercontent.com/CiQii/IOS/master/JS/supjav.js

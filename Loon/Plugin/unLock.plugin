@@ -1,0 +1,9 @@
+#!name=解锁会员
+#!desc=使用会员功能
+
+[Rewrite]
+# > 滴答清单6.3.80
+^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status response-body-json-replace pro true needSubscribe false proEndDate "2099-01-01T00:00:00.000+0000"
+
+[MITM]
+hostname = ticktick.com,dida365.com

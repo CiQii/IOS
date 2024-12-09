@@ -3,25 +3,15 @@
 [Rule]
 DOMAIN, api.liquidlink.cn, REJECT
 
-[Script]
+[Rewrite]
+# > 小黑盒
+^https:\/\/api\.xiaoheihe\.cn\/bbs\/app\/api\/search\/(welcome_page|found)\/v2 reject-200
+^https:\/\/api\.xiaoheihe\.cn\/bbs\/app\/api\/search\/found reject-200
 
+[Script]
 # > JavDB
 http-response ^https:\/\/api\.hechuangxinxi\.xyz\/api\/(v1\/(ads|startup|users)|v4\/movies\/\w+) script-path = javdb.js, requires-body = true, tag = javDB去除广告
 
-# > JavDB小黑盒
-^https:\/\/api\.xiaoheihe\.cn\/bbs\/app\/api\/search\/(welcome_page)\/v2 url reject
-
-# > 禁漫天堂
-^https?:\/\/.*18comic\.vip\/($|(album|photo).*$) url script-response-body https://raw.githubusercontent.com/CiQii/IOS/master/JS/18comic.js
-
-# > Supjav[网页优化]
-^https?:\/\/supjav\.com\/zh\/. url script-response-body https://raw.githubusercontent.com/CiQii/IOS/master/JS/supjav.js
-^https?:\/\/static\.adxadserv\.com url reject
-^https?:\/\/help\.fanza\.cc url reject
-^https?:\/\/go\.mnaspm\.com url reject
-
-# > Missav[网页优化]
-^https?:\/\/missav\.com\/. url script-response-body https://raw.githubusercontent.com/CiQii/IOS/master/JS/missav.js
 
 [MITM]
-hostname = api.hechuangxinxi.xyz,api.xiaoheihe.cn,supjav.com,missav.com
+hostname = api.hechuangxinxi.xyz,api.xiaoheihe.cn

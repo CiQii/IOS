@@ -10,8 +10,8 @@ DOMAIN, api.liquidlink.cn, REJECT
 
 [Script]
 # > JavDB
-http-response ^https:\/\/api\.hechuangxinxi\.xyz\/api\/(v1\/(ads|startup|users)|v4\/movies\/\w+) script-path = https://raw.githubusercontent.com/CiQii/IOS/master/JS/javdb.js, requires-body = true, tag = javDB去除广告
+http-response ^https:\/\/api\.ffaoa\.com\/api\/(v1\/(ads|startup|users)|v4\/movies\/\w+) script-path = https://raw.githubusercontent.com/CiQii/IOS/master/JS/javdb.js, requires-body = true, tag = javDB去除广告
 
 
 [MITM]
-hostname = api.hechuangxinxi.xyz,api.xiaoheihe.cn
+hostname = api.ffaoa.com,api.xiaoheihe.cn

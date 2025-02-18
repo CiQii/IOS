@@ -7,7 +7,7 @@ let body = $response.body;
 switch (isResp) {
   
   // JavDB
-  case /^https:\/\/api\.hechuangxinxi\.xyz\/api\/v\d\/\w+/.test(url):
+  case /^https:\/\/api\.ffaoa\.com\/api\/v\d\/\w+/.test(url):
     try {
       let obj = JSON.parse(body);
       if (url.includes("/api/v1/ads")) {
